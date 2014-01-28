@@ -2,15 +2,24 @@
 	<section class="ng-scope" id="todoapp" ng-controller="TodoListCtrl">
 		<header id="header">
 			<h1>todos</h1>
-			<form class="ng-pristine ng-valid" id="todo-form" ng-submit="addTodo()">
-				<input class="ng-pristine ng-valid" id="new-todo" placeholder="What needs to be done?" ng-model="newTodo" autofocus="">
+			<form id="todo-form" ng-submit="add(newTodo)">
+				<input id="new-todo" placeholder="What needs to be done?" ng-model="newTodo" autofocus="">
 			</form>
 		</header>
 		<section class="ng-hide" id="main" ng-show="todos.length">
-			<input class="ng-pristine ng-valid" id="toggle-all" ng-model="allChecked" ng-click="markAll(allChecked)" type="checkbox">
+			<input id="toggle-all" ng-model="allChecked" ng-click="markAll(allChecked)" type="checkbox">
 			<label for="toggle-all">Mark all as complete</label>
 			<ul id="todo-list">
-				<li ng-repeat="todo in todos | filter:statusFilter"></li>
+				<li ng-repeat="todo in todos | filter:statusFilter" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+					<div class="view">
+						<input class="toggle" type="checkbox" ng-model="todo.completed">
+						<label ng-dblclick="editTodo(todo)">{{todo.title}}</label>
+						<button class="destroy" ng-click="removeTodo(todo)"></button>
+					</div>
+					<form ng-submit="doneEditing(todo)">
+						<input class="edit" ng-trim="false" ng-model="todo.title" todo-escape="revertEditing(todo)" ng-blur="doneEditing(todo)" todo-focus="todo == editedTodo">
+					</form>
+				</li>
 			</ul>
 		</section>
 		<footer class="ng-hide" id="footer" ng-show="todos.length">
@@ -28,7 +37,9 @@
 					<a ng-class="{selected: status == 'completed'}" href="#/completed">Completed</a>
 				</li>
 			</ul>
-			<button class="ng-binding ng-hide" id="clear-completed" ng-click="clearCompletedTodos()" ng-show="completedCount">Clear completed (0)</button>
+			<button class="ng-binding ng-hide" id="clear-completed" ng-click="clearCompletedTodos()" ng-show="completedCount">
+				Clear completed ({{completedCount}})
+			</button>
 		</footer>
 	</section>
 </div>

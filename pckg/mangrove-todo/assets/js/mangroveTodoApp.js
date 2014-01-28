@@ -19,7 +19,7 @@ mangroveTodoApp
 					return newResponse;
 				});
 
-				RestangularProvider.setBaseUrl('index.php?option=com_mangrovetodo');
+				RestangularProvider.setBaseUrl('index.php?option=com_mangrovetodo&path=');
 
 				$urlRouterProvider
 					.otherwise('/todo');
@@ -39,6 +39,10 @@ mangroveTodoApp
 			'$scope', '$state', 'dataPersist',
 			function ($scope, $state, dataPersist)
 			{
+				$scope.add = function(todo) {
+					$scope.todos.push({title:todo});
+				};
+
 				dataPersist.getList(
 					$scope,
 					'todos',
@@ -47,6 +51,35 @@ mangroveTodoApp
 				);
 			}
 		]
+	);
+
+mangroveTodoApp
+	.directive('todoEscape',
+		function () {
+			var ESCAPE_KEY = 27;
+			return function (scope, elem, attrs) {
+				elem.bind('keydown', function (event) {
+					if (event.keyCode === ESCAPE_KEY) {
+						scope.$apply(attrs.todoEscape);
+					}
+				});
+			};
+		}
+	);
+
+mangroveTodoApp
+	.directive('todoFocus',
+		function todoFocus($timeout) {
+			return function (scope, elem, attrs) {
+				scope.$watch(attrs.todoFocus, function (newVal) {
+					if (newVal) {
+						$timeout(function () {
+							elem[0].focus();
+						}, 0, false);
+					}
+				});
+			};
+		}
 	);
 
 mangroveTodoApp
@@ -96,10 +129,21 @@ mangroveTodoApp
 
 					scope.load = function() {
 						var res = resource.split('/');
-
 						var request = Restangular;
 
-						request.customGet('', {service:res[0]})
+						if ( res.length == 1 ) {
+								request = request.all(res[0]).getList();
+							} else if ( res.length == 2 && !IsNumeric(res[1]) ) {
+								request = request.one(res[0]+'/'+res[1]).get();
+							}  else if ( res.length == 2 ) {
+								request = request.one(res[0], res[1]).get();
+							} else if ( res.length == 3 ) {
+								request = request.one(res[0], res[1]).all(res[2]).getList();
+							} else if ( res.length == 4 ) {
+								request = request.one(res[0]+'/'+res[1], res[2]).all(res[3]).getList();
+							}
+
+							request
 							.then(function(items) {
 								angular.forEach(items, function(item) {
 									scope[model].push(item.originalElement);
