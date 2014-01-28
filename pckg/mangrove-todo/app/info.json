@@ -1,7 +1,7 @@
 {
 	"type":"joomla-component",
 	"joomla":{
-		"name":"com_mangrove_todo",
+		"name":"com_mangrovetodo",
 		"admin":true
 	},
 	"version":"1.0",
