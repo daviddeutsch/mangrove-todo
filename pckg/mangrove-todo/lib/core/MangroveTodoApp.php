@@ -27,15 +27,9 @@ class MangroveTodoApp
 
 		if ( isset($p[1]) ) {
 			$method = strtolower($_SERVER['REQUEST_METHOD']) . ucfirst($p[1]);
-
-			unset($p[1], $p[0]);
 		} else {
 			$method = strtolower($_SERVER['REQUEST_METHOD']) . ucfirst($p[0]);
-
-			unset($p[0]);
 		}
-
-		$path = implode('/', $p);
 
 		$input = @file_get_contents('php://input');
 
