@@ -56,6 +56,8 @@ mangroveTodoApp
 			{
 				$scope.add = function() {
 					$scope.todos.push({title:$scope.newTodo});
+
+					$scope.newTodo = '';
 				};
 			}
 		]
@@ -73,6 +75,17 @@ mangroveTodoApp
 
 				$scope.done = function() {
 					$scope.editmode = false;
+				};
+
+				$scope.remove = function() {
+					for ( var i = 0; i < $scope.todos.length; i++ ) {
+						item = $scope.todos[i];
+						if (item.id == $scope.todo.id) {
+							$scope.todos.splice(i, 1);
+
+							Platform.performMicrotaskCheckpoint();
+						}
+					}
 				};
 			}
 		]
