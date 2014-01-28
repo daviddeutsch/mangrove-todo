@@ -13,6 +13,7 @@ $c = 'valanx/mangrove-todo/lib/core/';
 $includes = array(
 	'redbean/redbean-adaptive/rb',
 	$c . 'MangroveTodoApp',
+	$c . 'MangroveTodoModelFormatter',
 
 	$c . 'Models/TodoModel',
 	$c . 'Services/AbstractService',

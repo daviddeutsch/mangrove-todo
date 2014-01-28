@@ -48,7 +48,7 @@ class MangroveTodoApp
 
 	public static function getApp()
 	{
-		$csslink = '<link rel="stylesheet" type="text/css" media="all" href="' . JURI::root() . 'media/com_mangrove/css/%s.css" />';
+		$csslink = '<link rel="stylesheet" type="text/css" media="all" href="' . JURI::root() . 'media/com_mangrovetodo/css/%s.css" />';
 
 		$document = JFactory::getDocument();
 
@@ -56,12 +56,11 @@ class MangroveTodoApp
 		if ( $v->isCompatible('3.0') ) {
 			$document->addCustomTag( sprintf($csslink, 'joomla3-override') );
 		} else {
-			$document->addCustomTag( sprintf($csslink, 'bootstrap.min') );
 			$document->addCustomTag( sprintf($csslink, 'font-awesome.min') );
 			$document->addCustomTag( sprintf($csslink, 'joomla-override') );
 		}
 
-		$document->addCustomTag( sprintf($csslink, 'mangrove') );
+		$document->addCustomTag( sprintf($csslink, 'mangrove-todo') );
 
 		$jsfiles = array(
 			'jquery-1.7.2.min',
@@ -118,7 +117,7 @@ class MangroveTodoApp
 
 		self::$r->setupPipeline($japp->getCfg('dbprefix'));
 
-		self::$r->redbean->beanhelper->setModelFormatter(new MangroveModelFormatter);
+		self::$r->redbean->beanhelper->setModelFormatter(new MangroveTodoModelFormatter);
 	}
 
 }

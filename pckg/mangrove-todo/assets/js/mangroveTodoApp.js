@@ -37,36 +37,6 @@ mangroveTodoApp
 	);
 
 mangroveTodoApp
-	.controller('ProjectCtrl',
-		[
-			'$scope', '$state', '$stateParams', 'Restangular', 'dataPersist',
-			function ($scope, $state, $stateParams, Restangular, dataPersist)
-			{
-				$scope.editmode = false;
-
-				if ( $stateParams.projectId == 0 ) {
-					$scope.editmode = true;
-
-					return;
-				} else if ( typeof $scope.projects == 'undefined' ) {
-					$state.transitionTo('projects.list');
-				}
-
-				for ( var i = 0; i < $scope.projects.length; i++ ) {
-					if ($scope.projects[i].id == $stateParams.projectId) {
-						$scope.project = $scope.projects[i];
-					}
-				}
-
-				if ( typeof $scope.project == 'undefined' ) {
-					$state.transitionTo('projects.list');
-				}
-
-			}
-		]
-	);
-
-mangroveTodoApp
 	.controller('TodoListCtrl',
 		[
 			'$scope', '$state', 'dataPersist',
