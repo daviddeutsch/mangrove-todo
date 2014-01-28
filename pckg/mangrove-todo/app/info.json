@@ -1,0 +1,29 @@
+{
+	"type":"joomla-component",
+	"joomla":{
+		"name":"com_mangrove_todo",
+		"admin":true
+	},
+	"version":"1.0",
+	"require":
+		[
+			"valanx/mangrove-todo/lib/core",
+			"redbean/redbean-adaptive",
+			"google/excanvas",
+			"angularjs/angularjs",
+			"angularjs/angular-animate",
+			"angularjs/angular-resource",
+			"angularjs/angular-route",
+			"angular-ui/ui-router",
+			"angular-ui/bootstrap",
+			"mgonto/restangular",
+			"jeffbcross/omnibinder",
+			"polymer/observe-js",
+			"jquery/jquery",
+			"lodash/lodash",
+			"fontawesome/fontawesome",
+			"valanx/mangrove-todo/assets/css",
+			"valanx/mangrove-todo/assets/img",
+			"valanx/mangrove-todo/assets/js"
+		]
+}
