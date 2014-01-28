@@ -1,4 +1,8 @@
 <div ng-app="mangroveTodoApp" class="mangroveTodoApp" ng-cloak>
 	<h1>todos</h1>
-
+	<div id="todoapp" ng-controller="TodoListCtrl">
+		<div ui-view="header"></div>
+		<div ui-view="main"></div>
+		<div ui-view="footer"></div>
+	</div>
 </div>

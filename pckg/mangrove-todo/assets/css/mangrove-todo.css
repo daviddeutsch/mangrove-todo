@@ -13,8 +13,9 @@
 	appearance: none;
 }
 
-.m {
+#content-box {
 	background: #eaeaea url('../img/bg.png');
+	min-height: 400px;
 }
 
 .mangroveTodoApp {
@@ -38,7 +39,7 @@
 #todoapp {
 	background: #fff;
 	background: rgba(255, 255, 255, 0.9);
-	margin: 130px 0 40px 0;
+	margin: 40px 0 40px 0;
 	border: 1px solid #ccc;
 	position: relative;
 	border-top-left-radius: 2px;
@@ -67,11 +68,9 @@
 	color: #a9a9a9;
 }
 
-#todoapp h1 {
-	position: absolute;
-	top: -120px;
-	width: 100%;
+.mangroveTodoApp h1 {
 	font-size: 70px;
+	margin-top: 64px;
 	font-weight: bold;
 	text-align: center;
 	color: #b3b3b3;

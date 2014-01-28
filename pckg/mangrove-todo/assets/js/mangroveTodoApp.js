@@ -1,5 +1,9 @@
 var mangroveTodoApp = angular.module("mangroveTodoApp", ['restangular', 'ngRoute', 'ui.router', 'ngAnimate', 'ui.bootstrap', 'OmniBinder']);
 
+jurl = function (name) {
+	return "components/com_mangrovetodo/templates/" + name + ".html";
+};
+
 mangroveTodoApp
 	.config(
 		[
@@ -26,9 +30,33 @@ mangroveTodoApp
 
 				$stateProvider
 					.state('todo', {
-						url: '/todo'
+						url: '/todo',
+						views: {
+							"main": {
+								templateUrl: jurl('todos.list')
+							},
+							"header": {
+								templateUrl: jurl('header')
+							},
+							"footer": {
+								templateUrl: jurl('footer')
+							}
+						}
 					})
 				;
+			}
+		]
+	);
+
+mangroveTodoApp
+	.controller('HeadCtrl',
+		[
+			'$scope',
+			function ($scope)
+			{
+				$scope.add = function() {
+					$scope.todos.push({title:$scope.newTodo});
+				};
 			}
 		]
 	);
