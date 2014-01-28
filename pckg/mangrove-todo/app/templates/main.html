@@ -1,45 +1,4 @@
 <div ng-app="mangroveTodoApp" class="mangroveTodoApp" ng-cloak>
-	<section class="ng-scope" id="todoapp" ng-controller="TodoListCtrl">
-		<header id="header">
-			<h1>todos</h1>
-			<form id="todo-form" ng-submit="add(newTodo)">
-				<input id="new-todo" placeholder="What needs to be done?" ng-model="newTodo" autofocus="">
-			</form>
-		</header>
-		<section class="ng-hide" id="main" ng-show="todos.length">
-			<input id="toggle-all" ng-model="allChecked" ng-click="markAll(allChecked)" type="checkbox">
-			<label for="toggle-all">Mark all as complete</label>
-			<ul id="todo-list">
-				<li ng-repeat="todo in todos | filter:statusFilter" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
-					<div class="view">
-						<input class="toggle" type="checkbox" ng-model="todo.completed">
-						<label ng-dblclick="editTodo(todo)">{{todo.title}}</label>
-						<button class="destroy" ng-click="removeTodo(todo)"></button>
-					</div>
-					<form ng-submit="doneEditing(todo)">
-						<input class="edit" ng-trim="false" ng-model="todo.title" todo-escape="revertEditing(todo)" ng-blur="doneEditing(todo)" todo-focus="todo == editedTodo">
-					</form>
-				</li>
-			</ul>
-		</section>
-		<footer class="ng-hide" id="footer" ng-show="todos.length">
-					<span id="todo-count"><strong class="ng-binding">0</strong>
-						<ng-pluralize count="remainingCount" when="{ one: 'item left', other: 'items left' }">items left</ng-pluralize>
-					</span>
-			<ul id="filters">
-				<li>
-					<a class="selected" ng-class="{selected: status == ''} " href="#/">All</a>
-				</li>
-				<li>
-					<a ng-class="{selected: status == 'active'}" href="#/active">Active</a>
-				</li>
-				<li>
-					<a ng-class="{selected: status == 'completed'}" href="#/completed">Completed</a>
-				</li>
-			</ul>
-			<button class="ng-binding ng-hide" id="clear-completed" ng-click="clearCompletedTodos()" ng-show="completedCount">
-				Clear completed ({{completedCount}})
-			</button>
-		</footer>
-	</section>
+	<h1>todos</h1>
+
 </div>

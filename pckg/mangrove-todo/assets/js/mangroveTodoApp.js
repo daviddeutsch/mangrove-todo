@@ -34,15 +34,28 @@ mangroveTodoApp
 	);
 
 mangroveTodoApp
+	.controller('TodoCtrl',
+		[
+			'$scope',
+			function ($scope)
+			{
+				$scope.edit = function() {
+					$scope.editmode = true;
+				};
+
+				$scope.done = function() {
+					$scope.editmode = false;
+				};
+			}
+		]
+	);
+
+mangroveTodoApp
 	.controller('TodoListCtrl',
 		[
 			'$scope', '$state', 'dataPersist',
 			function ($scope, $state, dataPersist)
 			{
-				$scope.add = function(todo) {
-					$scope.todos.push({title:todo});
-				};
-
 				dataPersist.getList(
 					$scope,
 					'todos',
