@@ -4,7 +4,7 @@ class RestService extends AbstractService
 {
 	public function call( $method, $path, $data=null )
 	{
-		$p = explode('.', $path);
+		$p = explode('/', $path);
 
 		$rootmethod = strtolower($_SERVER['REQUEST_METHOD']);
 
@@ -40,7 +40,7 @@ class RestService extends AbstractService
 				foreach ( $return as $k => $v ) {
 					$return[$k]->id = (int) $v->id;
 				}
-			} else {
+			} elseif ( is_object($return) ) {
 				$return->id = (int) $return->id;
 			}
 		}
@@ -58,6 +58,6 @@ class RestService extends AbstractService
 
 	protected function restHandler()
 	{
-		return new \RedBean_Plugin_BeanCan(S::$r);
+		return new \RedBean_Plugin_BeanCan(MangroveTodoApp::$r);
 	}
 }
