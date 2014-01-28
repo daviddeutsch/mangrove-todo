@@ -8,7 +8,7 @@
 				ng-controller="TodoCtrl"
 				>
 				<div class="view">
-					<input class="toggle" type="checkbox" ng-model="todo.completed">
+					<input class="toggle" type="checkbox" ng-model="todo.completed" ng-checked="todo.completed">
 					<label ng-dblclick="edit()">{{todo.title}}</label>
 					<button class="destroy" ng-click="remove()"></button>
 				</div>
