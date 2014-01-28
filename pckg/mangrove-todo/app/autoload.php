@@ -18,6 +18,7 @@ $includes = array(
 	$c . 'Models/TodoModel',
 	$c . 'Services/AbstractService',
 	$c . 'Services/RestService',
+	$c . 'Services/HookService',
 	$c . 'Services/TodoService',
 );
 

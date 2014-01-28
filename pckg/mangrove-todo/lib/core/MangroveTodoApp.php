@@ -17,13 +17,25 @@ class MangroveTodoApp
 		self::getDB($japp);
 	}
 
-	public static function resolve( $task )
+	public static function resolve( $path )
 	{
-		if ( empty($task) ) return self::getApp();
+		if ( empty($path) ) return self::getApp();
 
-		$method = strtolower($_SERVER['REQUEST_METHOD']) . ucfirst($task);
+		$p = explode('/', $path);
 
-		$service = ucfirst($_REQUEST['service']) . 'Service';
+		$service = ucfirst($p[0]) . 'Service';
+
+		if ( isset($p[1]) ) {
+			$method = strtolower($_SERVER['REQUEST_METHOD']) . ucfirst($p[1]);
+
+			unset($p[1], $p[0]);
+		} else {
+			$method = strtolower($_SERVER['REQUEST_METHOD']) . ucfirst($p[0]);
+
+			unset($p[0]);
+		}
+
+		$path = implode('/', $p);
 
 		$input = @file_get_contents('php://input');
 
@@ -36,14 +48,14 @@ class MangroveTodoApp
 		if ( class_exists($service) ) {
 			$service = new $service();
 
-			$result = $service->call($method, $_REQUEST['path'], $input);
+			$result = $service->call($method, $path, $input);
 
 			echo json_encode($result);
 
 			exit;
 		}
 
-		return null;
+		exit;
 	}
 
 	public static function getApp()
@@ -113,7 +125,7 @@ class MangroveTodoApp
 
 		self::$r->selectDatabase('joomla');
 
-		self::$r->prefix($japp->getCfg('dbprefix') . 'mangrove_');
+		self::$r->prefix($japp->getCfg('dbprefix') . 'mangrovetodo_');
 
 		self::$r->setupPipeline($japp->getCfg('dbprefix'));
 
