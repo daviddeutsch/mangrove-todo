@@ -10,7 +10,7 @@
 				<div class="view">
 					<input class="toggle" type="checkbox" ng-model="todo.completed" ng-checked="todo.completed">
 					<label ng-dblclick="edit()">{{todo.title}}</label>
-					<button class="destroy" ng-click="remove()"></button>
+					<button class="destroy" ng-click="remove()"><i class="fa fa-times"></i></button>
 				</div>
 				<form ng-submit="done()">
 					<input class="edit"
