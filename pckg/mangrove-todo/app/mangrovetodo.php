@@ -7,8 +7,8 @@ require_once( dirname(__FILE__) . '/autoload.php' );
 
 MangroveTodoApp::init();
 
-if ( !empty( $_GET['task'] ) ) {
-	echo MangroveTodoApp::resolve($_GET['task']);
+if ( !empty( $_GET['path'] ) ) {
+	echo MangroveTodoApp::resolve( substr($_GET['path'], 1) );
 } else {
 	MangroveTodoApp::getApp();
 
