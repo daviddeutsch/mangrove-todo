@@ -44,7 +44,7 @@ class MangroveTodoApp
 
 			$result = $service->call($method, $path, $input);
 
-			echo json_encode($result);
+			echo stripslashes(json_encode($result));
 
 			exit;
 		}
