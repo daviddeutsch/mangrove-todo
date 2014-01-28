@@ -19,17 +19,14 @@ mangroveTodoApp
 					return newResponse;
 				});
 
+				RestangularProvider.setBaseUrl('index.php?option=com_mangrovetodo');
+
 				$urlRouterProvider
 					.otherwise('/todo');
 
 				$stateProvider
 					.state('todo', {
-						url: '/todo',
-						views: {
-							"main": {
-								templateUrl: '/partials/home.html'
-							}
-						}
+						url: '/todo'
 					})
 				;
 			}
@@ -60,50 +57,6 @@ mangroveTodoApp
 			{
 				var IsNumeric = function (input) {
 					return (input - 0) == input && (input+'').replace(/^\s+|\s+$/g, "").length > 0;
-				};
-
-				this.get = function (scope, model, resource, callback) {
-					scope.load = function() {
-						var res = resource.split('/');
-
-						var request = Restangular;
-
-						if ( res.length == 1 ) {
-							request = request.one(res[0]);
-						} else if ( res.length == 2 ) {
-							request = request.one(res[0], res[1]);
-						} else if ( res.length == 3 ) {
-							request = request.one(res[0], res[1]).one(res[2]);
-						} else if ( res.length == 4 ) {
-							request = request.one(res[0]+'/'+res[1], res[2]).one(res[3]);
-						}
-
-						request.get()
-							.then(function(item) {
-								scope[model] = item.originalElement;
-
-								appStatus.ready(500);
-							})
-							.then(function(){
-								scope.binder = obBinder(
-									scope,
-									model,
-									restangularBinder,
-									{
-										key: 'id',
-										query: resource,
-										type: obBinderTypes.COLLECTION
-									}
-								);
-							})
-							.then(function(){
-								if ( typeof callback.load !== 'undefined' ) {
-									callback.load();
-								}
-							});
-					};
-
-					scope.load();
 				};
 
 				this.getList = function (scope, model, resource, callback) {
@@ -146,19 +99,7 @@ mangroveTodoApp
 
 						var request = Restangular;
 
-						if ( res.length == 1 ) {
-							request = request.all(res[0]).getList();
-						} else if ( res.length == 2 && !IsNumeric(res[1]) ) {
-							request = request.one(res[0]+'/'+res[1]).get();
-						}  else if ( res.length == 2 ) {
-							request = request.one(res[0], res[1]).get();
-						} else if ( res.length == 3 ) {
-							request = request.one(res[0], res[1]).all(res[2]).getList();
-						} else if ( res.length == 4 ) {
-							request = request.one(res[0]+'/'+res[1], res[2]).all(res[3]).getList();
-						}
-
-						request
+						request.customGet('', {service:res[0]})
 							.then(function(items) {
 								angular.forEach(items, function(item) {
 									scope[model].push(item.originalElement);
