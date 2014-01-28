@@ -1,8 +1,34 @@
 <div ng-app="mangroveTodoApp" class="mangroveTodoApp" ng-cloak>
-	<div class="container">
-		<div ui-view="header"></div>
-		<div ui-view="main"></div>
-		<div ui-view></div>
-	</div>
-	<div ui-view="footer"></div>
+	<section class="ng-scope" id="todoapp" ng-controller="TodoListCtrl">
+		<header id="header">
+			<h1>todos</h1>
+			<form class="ng-pristine ng-valid" id="todo-form" ng-submit="addTodo()">
+				<input class="ng-pristine ng-valid" id="new-todo" placeholder="What needs to be done?" ng-model="newTodo" autofocus="">
+			</form>
+		</header>
+		<section class="ng-hide" id="main" ng-show="todos.length">
+			<input class="ng-pristine ng-valid" id="toggle-all" ng-model="allChecked" ng-click="markAll(allChecked)" type="checkbox">
+			<label for="toggle-all">Mark all as complete</label>
+			<ul id="todo-list">
+				<li ng-repeat="todo in todos | filter:statusFilter"></li>
+			</ul>
+		</section>
+		<footer class="ng-hide" id="footer" ng-show="todos.length">
+					<span id="todo-count"><strong class="ng-binding">0</strong>
+						<ng-pluralize count="remainingCount" when="{ one: 'item left', other: 'items left' }">items left</ng-pluralize>
+					</span>
+			<ul id="filters">
+				<li>
+					<a class="selected" ng-class="{selected: status == ''} " href="#/">All</a>
+				</li>
+				<li>
+					<a ng-class="{selected: status == 'active'}" href="#/active">Active</a>
+				</li>
+				<li>
+					<a ng-class="{selected: status == 'completed'}" href="#/completed">Completed</a>
+				</li>
+			</ul>
+			<button class="ng-binding ng-hide" id="clear-completed" ng-click="clearCompletedTodos()" ng-show="completedCount">Clear completed (0)</button>
+		</footer>
+	</section>
 </div>
