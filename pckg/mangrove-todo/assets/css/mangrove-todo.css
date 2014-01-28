@@ -290,7 +290,7 @@
 	margin-bottom: -1px;
 }
 
-#footer {
+#todo-footer {
 	color: #777;
 	padding: 0 15px;
 	position: absolute;
@@ -302,7 +302,7 @@
 	text-align: center;
 }
 
-#footer:before {
+#todo-footer:before {
 	content: '';
 	position: absolute;
 	right: 0;
