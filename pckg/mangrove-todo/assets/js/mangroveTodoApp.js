@@ -99,12 +99,18 @@ mangroveTodoApp
 			{
 				$scope.allChecked = false;
 
+				$scope.status = '';
+
 				dataPersist.getList(
 					$scope,
 					'todos',
 					'todo',
 					{}
 				);
+
+				$scope.setStatus = function(status) {
+					$scope.status = status;
+				};
 
 				$scope.markAll = function() {
 					$scope.allChecked = !$scope.allChecked;
@@ -125,6 +131,31 @@ mangroveTodoApp
 				};
 			}
 		]
+	);
+
+mangroveTodoApp
+	.filter('statusFilter',
+		function () {
+			return function (completed, something, status) {
+				if ( status == '' ) {
+					return completed;
+				}
+
+				var list = [];
+
+				for ( var i = 0; i < completed.length; i++ ) {
+					item = completed[i];
+
+					if ( status == 'active' && !completed[i].completed ) {
+						list.push(completed[i]);
+					} else if ( status == 'completed' && completed[i].completed ) {
+						list.push(completed[i]);
+					}
+				}
+
+				return list;
+			};
+		}
 	);
 
 mangroveTodoApp

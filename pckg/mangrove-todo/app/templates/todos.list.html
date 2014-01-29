@@ -4,7 +4,7 @@
 			<i id="toggle-all" class="fa fa-2x" ng-class="{'fa-circle-o': !allChecked, 'fa-check-circle-o': allChecked}" ng-click="markAll()"></i>
 		</span>
 		<ul id="todo-list">
-			<li ng-repeat="todo in todos | filter:statusFilter | orderBy:'id':true"
+			<li ng-repeat="todo in todos | statusFilter:todo.completed:status | orderBy:'id':true"
 				ng-class="{'completed': todo.completed, 'editing': editmode}"
 				ng-controller="TodoCtrl"
 				>
