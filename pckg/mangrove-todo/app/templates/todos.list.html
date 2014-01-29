@@ -1,7 +1,7 @@
 <section>
 	<section class="ng-hide" id="main" ng-show="todos.length">
 		<span>
-			<i id="toggle-all" class="fa fa-2x" ng-class="{'fa-circle-o': !allChecked, 'fa-circle': allChecked}" ng-click="markAll()"></i>
+			<i id="toggle-all" class="fa fa-2x" ng-class="{'fa-circle-o': !allChecked, 'fa-check-circle-o': allChecked}" ng-click="markAll()"></i>
 		</span>
 		<ul id="todo-list">
 			<li ng-repeat="todo in todos | filter:statusFilter | orderBy:'id':true"
@@ -9,7 +9,7 @@
 				ng-controller="TodoCtrl"
 				>
 				<div class="view">
-					<i class="fa" ng-class="{'fa-circle-o': !todo.completed, 'fa-circle': todo.completed}" ng-click="todo.completed=!todo.completed"></i>
+					<i class="fa" ng-class="{'fa-circle-o': !todo.completed, 'fa-check-circle-o': todo.completed}" ng-click="todo.completed=!todo.completed"></i>
 					<label ng-dblclick="edit()">{{todo.title}}</label>
 					<button class="destroy" ng-click="remove()"><i class="fa fa-times"></i></button>
 				</div>

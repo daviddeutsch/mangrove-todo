@@ -193,9 +193,16 @@
 
 
 #todo-list .view>i {
+	color: #aaa;
 	float: left;
 	margin-left: 10px;
 	margin-top: 18px;
+	-webkit-transition: all 1s;
+	transition: all 1s;
+}
+
+#todo-list li:hover .view>i {
+	color: #333;
 }
 
 #todo-list li .toggle {
