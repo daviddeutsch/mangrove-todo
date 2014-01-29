@@ -50,6 +50,34 @@ class HookService extends AbstractService
 
 	public function getUpdates( $subscriber )
 	{
-		return RedBean_Pipeline::getUpdatesForSubscriber( $subscriber );
+		$updates = RedBean_Pipeline::getUpdatesForSubscriber( $subscriber );
+
+		if ( empty($updates) ) return $updates;
+
+		foreach ( $updates as $k => $v ) {
+			$updates[$k] = $this->convertNumeric($v);
+		}
+
+		return $updates;
 	}
+
+	protected function convertNumeric( $object )
+	{
+		foreach ( get_object_vars($object) as $k => $v ) {
+			if ( $k == 'object' ) {
+				if ( is_string($v) ) $v = json_decode($v);
+
+				$object->$k = $this->convertNumeric($v);
+			} elseif ( is_numeric($v) ) {
+				if ( strpos($v, '.') != false ) {
+					$object->$k = (float) $v;
+				} else {
+					$object->$k = (int) $v;
+				}
+			}
+		}
+
+		return $object;
+	}
+
 }

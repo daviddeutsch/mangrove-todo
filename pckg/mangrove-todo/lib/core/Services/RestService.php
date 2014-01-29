@@ -38,10 +38,10 @@ class RestService extends AbstractService
 		if ( $rootmethod == 'get' ) {
 			if ( is_array($return) ) {
 				foreach ( $return as $k => $v ) {
-					$return[$k]->id = (int) $v->id;
+					$return[$k] = $this->convertNumeric($v);
 				}
-			} elseif ( is_object($return) ) {
-				$return->id = (int) $return->id;
+			} else {
+				$return = $this->convertNumeric($return);
 			}
 		}
 
@@ -54,6 +54,21 @@ class RestService extends AbstractService
 		}
 
 		return $return;
+	}
+
+	protected function convertNumeric( $object )
+	{
+		foreach ( get_object_vars($object) as $k => $v ) {
+			if ( is_numeric($v) ) {
+				if ( strpos($v, '.') != false ) {
+					$object->$k = (float) $v;
+				} else {
+					$object->$k = (int) $v;
+				}
+			}
+		}
+
+		return $object;
 	}
 
 	protected function restHandler()
