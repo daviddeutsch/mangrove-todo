@@ -115,6 +115,14 @@ mangroveTodoApp
 						item.completed = $scope.allChecked;
 					}
 				};
+
+				$scope.clearCompleted = function() {
+					for ( var i = 0; i < $scope.todos.length; i++ ) {
+						if ( $scope.todos[i].completed ) {
+							$scope.todos[i].remove();
+						}
+					}
+				};
 			}
 		]
 	);

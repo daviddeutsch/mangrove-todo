@@ -13,7 +13,7 @@
 			<a ng-class="{selected: status == 'completed'}" href="#/completed">Completed</a>
 		</li>
 	</ul>
-	<button class="ng-binding ng-hide" id="clear-completed" ng-click="clearCompletedTodos()" ng-show="completedCount">
-		Clear completed ({{todos.length}})
+	<button class="ng-binding ng-hide" id="clear-completed" ng-click="clearCompleted()" ng-show="completedCount">
+		Clear completed ({{completedCount}})
 	</button>
 </footer>
