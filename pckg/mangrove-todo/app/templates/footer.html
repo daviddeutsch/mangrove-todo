@@ -1,5 +1,5 @@
 <footer class="ng-hide" id="todo-footer" ng-show="todos.length">
-	<span id="todo-count"><strong class="ng-binding">{{todos.length}}</strong>
+	<span id="todo-count"><strong class="ng-binding">{{remainingCount}}</strong>
 		<ng-pluralize count="remainingCount" when="{ one: 'item left', other: 'items left' }">items left</ng-pluralize>
 	</span>
 	<ul id="filters">

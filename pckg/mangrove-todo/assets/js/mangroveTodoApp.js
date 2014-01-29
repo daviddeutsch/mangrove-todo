@@ -94,12 +94,23 @@ mangroveTodoApp
 mangroveTodoApp
 	.controller('TodoListCtrl',
 		[
-			'$scope', '$state', 'dataPersist',
-			function ($scope, $state, dataPersist)
+			'$scope', '$state', 'dataPersist', 'filterFilter',
+			function ($scope, $state, dataPersist, filterFilter)
 			{
-				$scope.allChecked = false;
-
 				$scope.status = '';
+
+				$scope.$watch('todos', function (newValue, oldValue) {
+					$scope.remainingCount = 0;
+
+					for ( var i = 0; i < newValue.length; i++ ) {
+						if ( !newValue[i].completed ) {
+							$scope.remainingCount++;
+						}
+					}
+
+					$scope.completedCount = newValue.length - $scope.remainingCount;
+					$scope.allChecked = !$scope.remainingCount;
+				}, true);
 
 				dataPersist.getList(
 					$scope,
@@ -125,7 +136,9 @@ mangroveTodoApp
 				$scope.clearCompleted = function() {
 					for ( var i = 0; i < $scope.todos.length; i++ ) {
 						if ( $scope.todos[i].completed ) {
-							$scope.todos[i].remove();
+							$scope.todos.splice(i, 1);
+
+							i--;
 						}
 					}
 				};
