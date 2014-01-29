@@ -1,14 +1,15 @@
 <section>
 	<section class="ng-hide" id="main" ng-show="todos.length">
-		<input id="toggle-all" ng-model="allChecked" ng-click="markAll(allChecked)" type="checkbox">
-		<label for="toggle-all">Mark all as complete</label>
+		<span>
+			<i id="toggle-all" class="fa fa-2x" ng-class="{'fa-circle-o': !allChecked, 'fa-circle': allChecked}" ng-click="markAll()"></i>
+		</span>
 		<ul id="todo-list">
 			<li ng-repeat="todo in todos | filter:statusFilter"
 				ng-class="{'completed': todo.completed, 'editing': editmode}"
 				ng-controller="TodoCtrl"
 				>
 				<div class="view">
-					<input class="toggle" type="checkbox" ng-model="todo.completed" ng-checked="todo.completed">
+					<i class="fa" ng-class="{'fa-circle-o': !todo.completed, 'fa-circle': todo.completed}" ng-click="todo.completed=!todo.completed"></i>
 					<label ng-dblclick="edit()">{{todo.title}}</label>
 					<button class="destroy" ng-click="remove()"><i class="fa fa-times"></i></button>
 				</div>

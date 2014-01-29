@@ -97,12 +97,24 @@ mangroveTodoApp
 			'$scope', '$state', 'dataPersist',
 			function ($scope, $state, dataPersist)
 			{
+				$scope.allChecked = false;
+
 				dataPersist.getList(
 					$scope,
 					'todos',
 					'todo',
 					{}
 				);
+
+				$scope.markAll = function() {
+					$scope.allChecked = !$scope.allChecked;
+
+					for ( var i = 0; i < $scope.todos.length; i++ ) {
+						item = $scope.todos[i];
+
+						item.completed = $scope.allChecked;
+					}
+				};
 			}
 		]
 	);
