@@ -1,5 +1,6 @@
-<header id="header" ng-controller="HeadCtrl">
+<header id="header">
 	<form id="todo-form" ng-submit="add()">
+		<i id="toggle-all" class="fa fa-2x" ng-class="{'fa-circle-o': !allChecked, 'fa-check-circle-o': allChecked}" ng-click="markAll()"></i>
 		<input id="new-todo" placeholder="What needs to be done?" ng-model="newTodo" autofocus="">
 	</form>
 </header>

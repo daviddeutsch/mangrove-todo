@@ -54,11 +54,8 @@ mangroveTodoApp
 			'$scope',
 			function ($scope)
 			{
-				$scope.add = function() {
-					$scope.todos.push({title:$scope.newTodo});
 
-					$scope.newTodo = '';
-				};
+
 			}
 		]
 	);
@@ -119,8 +116,10 @@ mangroveTodoApp
 					{}
 				);
 
-				$scope.setStatus = function(status) {
-					$scope.status = status;
+				$scope.add = function() {
+					$scope.todos.push({title:$scope.newTodo});
+
+					$scope.newTodo = '';
 				};
 
 				$scope.markAll = function() {
@@ -131,6 +130,10 @@ mangroveTodoApp
 
 						item.completed = $scope.allChecked;
 					}
+				};
+
+				$scope.setStatus = function(status) {
+					$scope.status = status;
 				};
 
 				$scope.clearCompleted = function() {

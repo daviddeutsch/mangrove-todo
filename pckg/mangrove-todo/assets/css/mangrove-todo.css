@@ -151,7 +151,7 @@
 
 #toggle-all {
 	position: absolute;
-	top: -44px;
+	top: 32px;
 	left: 0;
 	width: 40px;
 	text-align: center;
@@ -191,6 +191,11 @@
 	display: none;
 }
 
+#todo-form i,
+#todo-list .view i {
+	cursor: pointer;
+	z-index: 500;
+}
 
 #todo-list .view>i {
 	color: #aaa;
@@ -381,18 +386,6 @@
 
 	#todo-list li .toggle {
 		height: 40px;
-	}
-
-	#toggle-all {
-		top: -56px;
-		left: -15px;
-		width: 65px;
-		height: 41px;
-		-webkit-transform: rotate(90deg);
-		-ms-transform: rotate(90deg);
-		transform: rotate(90deg);
-		-webkit-appearance: none;
-		appearance: none;
 	}
 }
 
