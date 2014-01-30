@@ -1,6 +1,3 @@
 <?php
 
-class TodoService extends RestService
-{
-
-}
+class TodoService extends RestService {}

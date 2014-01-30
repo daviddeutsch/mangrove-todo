@@ -1,6 +1,3 @@
 <?php
 
-class TodoModel extends RedBean_PipelineModel
-{
-
-}
+class TodoModel extends RedBean_PipelineModel {}
