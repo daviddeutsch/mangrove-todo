@@ -4,13 +4,13 @@
 	</span>
 	<ul id="filters">
 		<li>
-			<a class="selected" ng-class="{selected: status == ''} " ng-click="setStatus('')" href="#/">All</a>
+			<a class="selected" ng-class="{selected: status == ''} " ng-click="$parent.status=''" href="#/">All</a>
 		</li>
 		<li>
-			<a ng-class="{selected: status == 'active'}" ng-click="setStatus('active')" href="#/active">Active</a>
+			<a ng-class="{selected: status == 'active'}" ng-click="$parent.status='active'" href="#/active">Active</a>
 		</li>
 		<li>
-			<a ng-class="{selected: status == 'completed'}" ng-click="setStatus('completed')" href="#/completed">Completed</a>
+			<a ng-class="{selected: status == 'completed'}" ng-click="$parent.status='completed'" href="#/completed">Completed</a>
 		</li>
 	</ul>
 	<button class="ng-binding ng-hide" id="clear-completed" ng-click="clearCompleted()" ng-show="completedCount">

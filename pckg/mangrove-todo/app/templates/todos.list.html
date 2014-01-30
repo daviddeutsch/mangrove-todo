@@ -6,15 +6,18 @@
 				ng-controller="TodoCtrl"
 				>
 				<div class="view">
-					<i class="fa" ng-class="{'fa-circle-o': !todo.completed, 'fa-check-circle-o': todo.completed}" ng-click="todo.completed=!todo.completed"></i>
-					<label ng-dblclick="edit()">{{todo.title}}</label>
+					<i class="fa"
+					   ng-class="{'fa-circle-o': !todo.completed, 'fa-check-circle-o': todo.completed}"
+					   ng-click="todo.completed=!todo.completed">
+					   </i>
+					<label ng-dblclick="editmode=true">{{todo.title}}</label>
 					<button class="destroy" ng-click="remove()"><i class="fa fa-times"></i></button>
 				</div>
 				<form ng-submit="done()">
 					<input class="edit"
 						   ng-trim="false"
 						   ng-model="todo.title"
-						   ng-blur="done()"
+						   ng-blur="editmode=false"
 						   todo-focus="todo == editedTodo">
 				</form>
 			</li>

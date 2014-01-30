@@ -61,14 +61,6 @@ mangroveTodoApp
 		'$scope',
 		function ($scope)
 		{
-			$scope.edit = function() {
-				$scope.editmode = true;
-			};
-
-			$scope.done = function() {
-				$scope.editmode = false;
-			};
-
 			$scope.remove = function() {
 				for ( var i=0; i<$scope.todos.length; i++ ) {
 					item = $scope.todos[i];
@@ -89,6 +81,8 @@ mangroveTodoApp
 		'$scope', '$state', 'dataPersist', 'filterFilter',
 		function ($scope, $state, dataPersist, filterFilter)
 		{
+			dataPersist.getList($scope, 'todos', 'todo');
+
 			$scope.$watch('todos', function (todos, oldTodos) {
 				$scope.remainingCount = 0;
 
@@ -100,18 +94,12 @@ mangroveTodoApp
 				$scope.allChecked = !$scope.remainingCount;
 			}, true);
 
-			dataPersist.getList($scope, 'todos', 'todo');
-
 			$scope.markAll = function() {
 				angular.forEach($scope.todos, function(todo){
 					todo.completed = !$scope.allChecked;
 				});
 
 				Platform.performMicrotaskCheckpoint();
-			};
-
-			$scope.setStatus = function(status) {
-				$scope.status = status;
 			};
 
 			$scope.clearCompleted = function() {
