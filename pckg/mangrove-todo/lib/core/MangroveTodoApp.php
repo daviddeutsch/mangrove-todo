@@ -85,7 +85,7 @@ class MangroveTodoApp
 		);
 
 		foreach ( $jsfiles as $file ) {
-			if ( $file == 'angular.min' ) {
+			if ( false /*$file == 'angular.min'*/ ) {
 				$document->addScript( 'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js' );
 			} else {
 				$document->addScript( JURI::root() . 'media/com_mangrovetodo/js/' . $file . '.js' );

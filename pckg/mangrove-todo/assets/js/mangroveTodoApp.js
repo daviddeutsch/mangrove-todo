@@ -54,8 +54,11 @@ mangroveTodoApp
 			'$scope',
 			function ($scope)
 			{
+				$scope.add = function() {
+					$scope.todos.push({title:$scope.newTodo});
 
-
+					$scope.newTodo = '';
+				};
 			}
 		]
 	);
@@ -115,12 +118,6 @@ mangroveTodoApp
 					'todo',
 					{}
 				);
-
-				$scope.add = function() {
-					$scope.todos.push({title:$scope.newTodo});
-
-					$scope.newTodo = '';
-				};
 
 				$scope.markAll = function() {
 					$scope.allChecked = !$scope.allChecked;
