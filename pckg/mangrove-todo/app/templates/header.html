@@ -3,7 +3,7 @@
 		<i id="toggle-all"
 		   class="fa fa-2x"
 		   ng-show="todos.length"
-		   ng-class="{'fa-circle-o': !allChecked, 'fa-check-circle-o': allChecked}"
+		   ng-class="{'fa-circle-o': !checked, 'fa-check-circle-o': checked}"
 		   ng-click="markAll()"></i>
 		<input id="new-todo" placeholder="What needs to be done?" ng-model="newTodo" autofocus="">
 	</form>

@@ -24,15 +24,9 @@ mangroveTodoApp
 					.state('todo', {
 						url: '/todo',
 						views: {
-							"main": {
-								templateUrl: jurl('todos.list')
-							},
-							"header": {
-								templateUrl: jurl('header')
-							},
-							"footer": {
-								templateUrl: jurl('footer')
-							}
+							"main":   { templateUrl: jurl('todos.list') },
+							"header": { templateUrl: jurl('header') },
+							"footer": { templateUrl: jurl('footer') }
 						}
 					})
 				;
@@ -62,14 +56,9 @@ mangroveTodoApp
 		function ($scope)
 		{
 			$scope.remove = function() {
-				for ( var i=0; i<$scope.todos.length; i++ ) {
-					item = $scope.todos[i];
-					if (item.id == $scope.todo.id) {
-						$scope.todos.splice(i, 1);
+				$scope.todos = _.filter($scope.todos, {'id':$scope.todo.id});
 
-						Platform.performMicrotaskCheckpoint();
-					}
-				}
+				Platform.performMicrotaskCheckpoint();
 			};
 		}
 		]
@@ -84,41 +73,29 @@ mangroveTodoApp
 			dataPersist.getList($scope, 'todos', 'todo');
 
 			$scope.$watch('todos', function (todos, oldTodos) {
-				$scope.remainingCount = 0;
-
-				angular.forEach(todos, function(todo){
-					if ( !todo.completed ) $scope.remainingCount++;
-				});
-
-				$scope.completedCount = todos.length - $scope.remainingCount;
-				$scope.allChecked = !$scope.remainingCount;
+				$scope.remaining  = _.filter($scope.todos, 'completed').length;
+				$scope.completed  = todos.length - $scope.remaining;
+				$scope.checked    = !$scope.remaining;
 			}, true);
 
 			$scope.markAll = function() {
 				angular.forEach($scope.todos, function(todo){
-					todo.completed = !$scope.allChecked;
+					todo.completed = !$scope.checked;
 				});
 
 				Platform.performMicrotaskCheckpoint();
 			};
 
 			$scope.clearCompleted = function() {
-				for ( var i=0; i<$scope.todos.length; i++ ) {
-					if ( $scope.todos[i].completed ) {
-						$scope.todos.splice(i, 1);
+				$scope.todos = _.filter($scope.todos, 'completed');
 
-						i--;
-					}
-
-					Platform.performMicrotaskCheckpoint();
-				}
+				Platform.performMicrotaskCheckpoint();
 			};
 		}
 		]
 	);
 
-mangroveTodoApp
-	.filter('statusFilter',
+mangroveTodoApp.filter('statusFilter',
 		function () {
 			return function (todos, something, status) {
 				if ( status == '' ) return completed;
@@ -137,13 +114,11 @@ mangroveTodoApp
 		}
 	);
 
-mangroveTodoApp
-	.directive('todoEscape',
+mangroveTodoApp.directive('todoEscape',
 		function () {
-			var ESCAPE_KEY = 27;
 			return function (scope, elem, attrs) {
 				elem.bind('keydown', function (event) {
-					if (event.keyCode === ESCAPE_KEY) {
+					if (event.keyCode === 27) {
 						scope.$apply(attrs.todoEscape);
 					}
 				});
@@ -151,8 +126,7 @@ mangroveTodoApp
 		}
 	);
 
-mangroveTodoApp
-	.directive('todoFocus',
+mangroveTodoApp.directive('todoFocus',
 		function todoFocus($timeout) {
 			return function (scope, elem, attrs) {
 				scope.$watch(attrs.todoFocus, function (newVal) {

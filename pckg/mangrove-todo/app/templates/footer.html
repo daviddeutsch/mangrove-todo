@@ -1,6 +1,6 @@
 <footer class="ng-hide" id="todo-footer" ng-show="todos.length">
-	<span id="todo-count"><strong class="ng-binding">{{remainingCount}}</strong>
-		<ng-pluralize count="remainingCount" when="{ one: 'item left', other: 'items left' }">items left</ng-pluralize>
+	<span id="todo-count"><strong class="ng-binding">{{remaining}}</strong>
+		<ng-pluralize count="remaining" when="{ one: 'item left', other: 'items left' }">items left</ng-pluralize>
 	</span>
 	<ul id="filters">
 		<li>
@@ -13,7 +13,7 @@
 			<a ng-class="{selected: status == 'completed'}" ng-click="$parent.status='completed'" href="#/completed">Completed</a>
 		</li>
 	</ul>
-	<button class="ng-binding ng-hide" id="clear-completed" ng-click="clearCompleted()" ng-show="completedCount">
-		Clear completed ({{completedCount}})
+	<button class="ng-binding ng-hide" id="clear-completed" ng-click="clearCompleted()" ng-show="completed">
+		Clear completed ({{completed}})
 	</button>
 </footer>
