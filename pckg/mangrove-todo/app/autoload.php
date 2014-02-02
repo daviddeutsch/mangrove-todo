@@ -8,18 +8,20 @@
 
 $base = realpath( dirname(__FILE__) . '/../../../libraries' );
 
-$c = 'valanx/mangrove-todo/lib/core/';
+$b = 'valanx/mangrove-todo/lib/core/';
+
+$c = 'valanx/mangrove-base/lib/core/';
 
 $includes = array(
 	'redbean/redbean-adaptive/rb',
-	$c . 'MangroveTodoApp',
-	$c . 'MangroveTodoModelFormatter',
+	$b . 'MangroveAppBase',
+	$b . 'MangroveModelFormatter',
 
-	$c . 'Models/TodoModel',
-	$c . 'Services/AbstractService',
-	$c . 'Services/RestService',
-	$c . 'Services/HookService',
-	$c . 'Services/TodoService',
+	$c . 'MangroveTodoApp',
+
+	$b . 'Services/AbstractService',
+	$b . 'Services/RestService',
+	$b . 'Services/HookService',
 );
 
 foreach ( $includes as $path ) {
