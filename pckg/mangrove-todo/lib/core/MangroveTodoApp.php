@@ -23,6 +23,7 @@ class MangroveTodoApp extends MangroveAppBase
 				'ui-bootstrap-tpls.min', 'angular-ui-router.min',
 				'lodash.min', 'restangular.min',
 				'observe', 'omnibinder',
+				'mangroveBase',
 				'mangroveTodoApp'
 			)
 		);
