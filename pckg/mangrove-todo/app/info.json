@@ -7,7 +7,7 @@
 	"version":"1.0",
 	"require":
 		[
-			"valanx/mangrove-todo/lib/core",
+			"valanx/mangrove-todo/lib/*",
 			"redbean/redbean-adaptive",
 			"google/excanvas",
 			"angularjs/angularjs",
@@ -22,8 +22,6 @@
 			"jquery/jquery",
 			"lodash/lodash",
 			"fontawesome/fontawesome",
-			"valanx/mangrove-todo/assets/css",
-			"valanx/mangrove-todo/assets/img",
-			"valanx/mangrove-todo/assets/js"
+			"valanx/mangrove-todo/assets/*"
 		]
 }
