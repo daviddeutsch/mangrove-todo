@@ -15,6 +15,7 @@ $c = 'valanx/mangrove-base/lib/core/';
 $includes = array(
 	'redbean/redbean-adaptive/rb',
 	$b . 'MangroveAppBase',
+	$b . 'MangroveAppInstance',
 	$b . 'MangroveModelFormatter',
 
 	$c . 'MangroveTodoApp',
