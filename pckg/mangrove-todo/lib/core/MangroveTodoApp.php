@@ -1,6 +1,6 @@
 <?php
 
-class MangroveTodoApp extends MangroveAppBase
+class MangroveTodoApp extends MangroveAppInstance
 {
 	public static function getApp()
 	{
