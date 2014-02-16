@@ -1,7 +1,6 @@
 var mangroveTodoApp = angular.module("mangroveTodoApp",
 	[
-		'restangular', 'ngRoute', 'ui.router',
-		'ngAnimate', 'ui.bootstrap', 'OmniBinder',
+		'ui.router', 'ngAnimate', 'ui.bootstrap',
 		'mangroveBase'
 	]
 );

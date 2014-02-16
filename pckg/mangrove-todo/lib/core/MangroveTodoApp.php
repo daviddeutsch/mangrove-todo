@@ -2,7 +2,9 @@
 
 class MangroveTodoApp extends MangroveAppInstance
 {
-	public static function getApp()
+	public $name = 'mangrove-todo';
+
+	public function getApp()
 	{
 		$v = new JVersion();
 
@@ -19,9 +21,8 @@ class MangroveTodoApp extends MangroveAppInstance
 			'js',
 			array(
 				'jquery-1.7.2.min',
-				'angular.min', 'angular-animate.min', 'angular-resource.min', 'angular-route.min',
+				'angular.min', 'angular-animate.min',
 				'ui-bootstrap-tpls.min', 'angular-ui-router.min',
-				'lodash.min', 'restangular.min',
 				'observe', 'omnibinder',
 				'mangroveBase',
 				'mangroveTodoApp'

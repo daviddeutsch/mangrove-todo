@@ -7,21 +7,9 @@
 	"version":"1.0",
 	"require":
 		[
+			"valanx/mangrove-base/*",
 			"valanx/mangrove-todo/lib/*",
-			"redbean/redbean-adaptive",
-			"google/excanvas",
-			"angularjs/angularjs",
-			"angularjs/angular-animate",
-			"angularjs/angular-resource",
-			"angularjs/angular-route",
-			"angular-ui/ui-router",
-			"angular-ui/bootstrap",
-			"mgonto/restangular",
-			"jeffbcross/omnibinder",
-			"polymer/observe-js",
-			"jquery/jquery",
-			"lodash/lodash",
-			"fontawesome/fontawesome",
-			"valanx/mangrove-todo/assets/*"
+			"valanx/mangrove-todo/assets/*",
+			"fontawesome/fontawesome"
 		]
 }
