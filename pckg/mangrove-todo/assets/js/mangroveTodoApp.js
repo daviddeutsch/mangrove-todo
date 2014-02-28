@@ -11,90 +11,91 @@ jurl = function (name) {
 
 mangroveTodoApp
 	.config(
-		[
-			'$stateProvider', '$urlRouterProvider', 'RestangularProvider',
-			function ($stateProvider, $urlRouterProvider, RestangularProvider)
-			{
-				RestangularProvider.setBaseUrl('index.php?option=com_mangrovetodo&path=');
+	[
+	'$stateProvider', '$urlRouterProvider', 'RestangularProvider',
+	function ($stateProvider, $urlRouterProvider, RestangularProvider)
+	{
+		RestangularProvider.setBaseUrl('index.php?option=com_mangrovetodo&path=');
 
-				$urlRouterProvider.otherwise('/todo');
+		$urlRouterProvider.otherwise('/todo');
 
-				$stateProvider
-					.state('todo', {
-						url: '/todo',
-						views: {
-							"main":   { templateUrl: jurl('todos.list') },
-							"header": { templateUrl: jurl('header') },
-							"footer": { templateUrl: jurl('footer') }
-						}
-					})
-				;
-			}
-		]
-	);
+		$stateProvider
+			.state('todo', {
+				url: '/todo',
+				views: {
+					"main":   { templateUrl: jurl('todos.list') },
+					"header": { templateUrl: jurl('header') },
+					"footer": { templateUrl: jurl('footer') }
+				}
+			})
+		;
+	}
+	]
+);
 
 mangroveTodoApp
 	.controller('HeadCtrl',
-		[
-		'$scope',
-		function ($scope)
-		{
-			$scope.add = function() {
-				$scope.todos.push({title:$scope.newTodo});
+	[
+	'$scope',
+	function ($scope)
+	{
+		$scope.add = function() {
+			$scope.todos.push({title:$scope.newTodo});
 
-				$scope.newTodo = '';
-			};
-		}
-		]
-	);
+			$scope.newTodo = '';
+		};
+	}
+	]
+);
 
 mangroveTodoApp
 	.controller('TodoCtrl',
-		[
-		'$scope',
-		function ($scope)
-		{
-			$scope.remove = function() {
-				$scope.todos = _.filter($scope.todos, {'id':$scope.todo.id});
+	[
+	'$scope',
+	function ($scope)
+	{
+		$scope.remove = function() {
+			$scope.todos = _.filter($scope.todos, {'id':$scope.todo.id});
 
-				Platform.performMicrotaskCheckpoint();
-			};
-		}
-		]
-	);
+			Platform.performMicrotaskCheckpoint();
+		};
+	}
+	]
+);
 
 mangroveTodoApp
 	.controller('TodoListCtrl',
-		[
-		'$scope', '$state', 'dataPersist', 'filterFilter',
-		function ($scope, $state, dataPersist, filterFilter)
-		{
-			dataPersist.getList($scope, 'todos', 'todo');
+	[
+	'$scope', '$state', 'dataPersist', 'filterFilter',
+	function ($scope, $state, dataPersist, filterFilter)
+	{
+		dataPersist.getList($scope, 'todos', 'todo');
 
-			$scope.$watch('todos', function (todos, oldTodos) {
-				$scope.remaining  = _.filter($scope.todos, 'completed').length;
-				$scope.completed  = todos.length - $scope.remaining;
-				$scope.checked    = !$scope.remaining;
-			}, true);
+		$scope.$watch('todos', function (todos, oldTodos) {
+			$scope.remaining  = _.filter($scope.todos, 'completed').length;
+			$scope.completed  = todos.length - $scope.remaining;
+			$scope.checked    = !$scope.remaining;
+		}, true);
 
-			$scope.markAll = function() {
-				angular.forEach($scope.todos, function(todo){
-					todo.completed = !$scope.checked;
-				});
+		$scope.markAll = function() {
+			angular.forEach($scope.todos, function(todo){
+				todo.completed = !$scope.checked;
+			});
 
-				Platform.performMicrotaskCheckpoint();
-			};
+			Platform.performMicrotaskCheckpoint();
+		};
 
-			$scope.clearCompleted = function() {
-				$scope.todos = _.filter($scope.todos, 'completed');
+		$scope.clearCompleted = function() {
+			$scope.todos = _.filter($scope.todos, 'completed');
 
-				Platform.performMicrotaskCheckpoint();
-			};
-		}
-		]
-	);
+			Platform.performMicrotaskCheckpoint();
+		};
+	}
+	]
+);
 
-mangroveTodoApp.filter('statusFilter',
+mangroveTodoApp
+	.filter('statusFilter',
 		function () {
 			return function (todos, something, status) {
 				if ( status == '' ) return completed;
@@ -113,7 +114,8 @@ mangroveTodoApp.filter('statusFilter',
 		}
 	);
 
-mangroveTodoApp.directive('todoEscape',
+mangroveTodoApp
+	.directive('todoEscape',
 		function () {
 			return function (scope, elem, attrs) {
 				elem.bind('keydown', function (event) {
@@ -125,7 +127,8 @@ mangroveTodoApp.directive('todoEscape',
 		}
 	);
 
-mangroveTodoApp.directive('todoFocus',
+mangroveTodoApp
+	.directive('todoFocus',
 		function todoFocus($timeout) {
 			return function (scope, elem, attrs) {
 				scope.$watch(attrs.todoFocus, function (newVal) {
