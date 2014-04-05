@@ -49,33 +49,24 @@ mangroveTodoApp
 );
 
 mangroveTodoApp
-	.controller('TodoCtrl',
-	[
-	'$scope',
-	function ($scope)
-	{
-		$scope.remove = function() {
-			$scope.todos = _.filter($scope.todos, {'id':$scope.todo.id});
-
-			Platform.performMicrotaskCheckpoint();
-		};
-	}
-	]
-);
-
-mangroveTodoApp
 	.controller('TodoListCtrl',
 	[
 	'$scope', '$state', 'dataPersist', 'filterFilter',
 	function ($scope, $state, dataPersist, filterFilter)
 	{
-		dataPersist.getList($scope, 'todos', 'todo');
-
-		$scope.$watch('todos', function (todos, oldTodos) {
-			$scope.remaining  = _.filter($scope.todos, 'completed').length;
-			$scope.completed  = todos.length - $scope.remaining;
-			$scope.checked    = !$scope.remaining;
-		}, true);
+		dataPersist.bindResource(
+			$scope,
+			{
+				res: 'todo',
+				callback: {}
+			}
+		).then(function(){
+				$scope.$watch('todos', function (todos, oldTodos) {
+					$scope.remaining  = _.filter($scope.todos, 'completed').length;
+					$scope.completed  = todos.length - $scope.remaining;
+					$scope.checked    = !$scope.remaining;
+				}, true);
+			});
 
 		$scope.markAll = function() {
 			angular.forEach($scope.todos, function(todo){
