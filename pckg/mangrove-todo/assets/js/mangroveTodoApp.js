@@ -34,33 +34,13 @@ mangroveTodoApp
 );
 
 mangroveTodoApp
-	.controller('HeadCtrl',
-	[
-	'$scope',
-	function ($scope)
-	{
-		$scope.add = function() {
-			$scope.todos.push({title:$scope.newTodo});
-
-			$scope.newTodo = '';
-		};
-	}
-	]
-);
-
-mangroveTodoApp
 	.controller('TodoListCtrl',
 	[
 	'$scope', '$state', 'dataPersist', 'filterFilter',
 	function ($scope, $state, dataPersist, filterFilter)
 	{
-		dataPersist.bindResource(
-			$scope,
-			{
-				res: 'todo',
-				callback: {}
-			}
-		).then(function(){
+		dataPersist.bindResource($scope, {res: 'todo'})
+			.then(function(){
 				$scope.$watch('todos', function (todos, oldTodos) {
 					$scope.remaining  = _.filter($scope.todos, 'completed').length;
 					$scope.completed  = todos.length - $scope.remaining;
@@ -86,49 +66,45 @@ mangroveTodoApp
 );
 
 mangroveTodoApp
-	.filter('statusFilter',
-		function () {
-			return function (todos, something, status) {
-				if ( status == '' ) return completed;
+	.filter( 'statusFilter',
+	function () {
+		return function (todos, something, status) {
+			if ( status == '' ) return completed;
 
-				var list = [];
-				angular.forEach(todos, function(todo){
-					if ( status == 'active' && !todo.completed ) {
-						list.push(todo);
-					} else if ( status == 'completed' && todo.completed ) {
-						list.push(todo);
-					}
-				});
+			var list = [];
+			angular.forEach(todos, function(todo){
+				if ( status == 'active' && !todo.completed ) {
+					list.push(todo);
+				} else if ( status == 'completed' && todo.completed ) {
+					list.push(todo);
+				}
+			});
 
-				return list;
-			};
-		}
-	);
-
-mangroveTodoApp
-	.directive('todoEscape',
-		function () {
-			return function (scope, elem, attrs) {
-				elem.bind('keydown', function (event) {
-					if (event.keyCode === 27) {
-						scope.$apply(attrs.todoEscape);
-					}
-				});
-			};
-		}
-	);
+			return list;
+		};
+	}
+);
 
 mangroveTodoApp
-	.directive('todoFocus',
-		function todoFocus($timeout) {
-			return function (scope, elem, attrs) {
-				scope.$watch(attrs.todoFocus, function (newVal) {
-					if (newVal) {
-						$timeout(function () {
-							elem[0].focus();
-						}, 0, false);
-					}
-				});
-			};
-		}
-	);
+	.directive( 'todoEscape',
+	function () {
+		return function (scope, elem, attrs) {
+			elem.bind('keydown', function (event) {
+				if (event.keyCode === 27) scope.$apply(attrs.todoEscape);
+			});
+		};
+	}
+);
+
+mangroveTodoApp
+	.directive( 'todoFocus',
+	function todoFocus($timeout) {
+		return function (scope, elem, attrs) {
+			scope.$watch(attrs.todoFocus, function (newVal) {
+				if (newVal) {
+					$timeout(function () { elem[0].focus(); }, 0, false);
+				}
+			});
+		};
+	}
+);

@@ -1,5 +1,5 @@
-<header id="header" ng-controller="HeadCtrl">
-	<form id="todo-form" ng-submit="add()">
+<header id="header">
+	<form id="todo-form" ng-submit="add({title:newTodo})">
 		<i id="toggle-all"
 		   class="fa fa-2x"
 		   ng-show="todos.length"
