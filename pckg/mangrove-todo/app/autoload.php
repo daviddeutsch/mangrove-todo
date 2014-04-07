@@ -15,15 +15,12 @@ $t = 'valanx/mangrove-todo/lib/core/';
 foreach (
 	array(
 		'redbean/redbean-adaptive/rb',
-		$b . 'MangroveAppBase',
-		$b . 'MangroveAppInstance',
-		$b . 'MangroveModelFormatter',
+		'valanx/saltwater/sw',
 
-		$t . 'MangroveTodoApp',
+		$b . 'Context/Joomla',
+		$b . 'MangroveApp',
 
-		$b . 'Services/AbstractService',
-		$b . 'Services/RestService',
-		$b . 'Services/HookService',
+		$t . 'Context/MangroveTodo',
 	) as $path ) {
 	include_once( $base . '/' . $path . '.php' );
 }
